@@ -4,8 +4,6 @@ I've been watching you for a while now...
 
 ## Description
 
-I've been watching you for a while now.
-
 Balboni is a modular scanner for git repositories currently working with repositories hosted on Huggignface.
 
 It's basic architecture is a API gateway that receives post requests from a Huggingface Webhook once received we parse the request to extract the repo url.
