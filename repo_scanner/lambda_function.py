@@ -90,7 +90,6 @@ def lambda_handler(event, context):
 
             if trufflehog_output:
                 logger.info(f"TruffleHog results for {repo_url}:\n{trufflehog_output}")
-                # Here you would typically send this to S3 or another storage service
             else:
                 logger.info(f"No output from TruffleHog for {repo_url}")
 
