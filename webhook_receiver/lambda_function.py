@@ -15,9 +15,9 @@ SQS_QUEUE_URL = os.environ['SQS_QUEUE_URL']
 def lambda_handler(event, context):
     try:
         body = json.loads(event['body'])
+        logger.info(body)
 
-        message = f"Received webhook from Hugging Face:\n```json\n{json.dumps(body, indent=2)}\n```"
-
+        message = f"Webhook received {body['repo']['name']}"
         discord_response = requests.post(DISCORD_WEBHOOK_URL, json={'content': message})
         discord_response.raise_for_status()
 
