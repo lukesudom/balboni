@@ -113,8 +113,6 @@ def lambda_handler(event, context):
 
             if trufflehog_output:
                 logger.info(f"TruffleHog results for {repo_url}:\n{trufflehog_output}")
-<<<<<<< HEAD
-=======
                 results = [json.loads(line) for line in trufflehog_output.strip().split('\n')]
                 all_results.extend(results)
 
@@ -134,7 +132,6 @@ def lambda_handler(event, context):
                     discord_message += "\n\n"
 
                 send_to_discord(discord_message)
->>>>>>> 36e6ba1 (feat: add terraform files - this code is working)
             else:
                 logger.info(f"No output from TruffleHog for {repo_url}")
                 send_to_discord(f"No secrets found in repository: {repo_name}")
@@ -147,12 +144,8 @@ def lambda_handler(event, context):
     logger.info("Lambda function execution completed")
     return {
         'statusCode': 200,
-<<<<<<< HEAD
-        'body': json.dumps('Scan completed')
-=======
         'body': json.dumps({
             'message': 'Scan completed',
             'results': all_results
         })
->>>>>>> 36e6ba1 (feat: add terraform files - this code is working)
     }
