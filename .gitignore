@@ -1,0 +1,7 @@
+.terraform
+.terraform.lock.hcl
+terraform.tfvars
+state_resources
+safety
+.idea
+.env
