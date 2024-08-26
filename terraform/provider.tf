@@ -11,7 +11,7 @@ terraform {
   backend "s3" {
     bucket         = "balboni-state"
     key            = "repo-scanner/terraform.tfstate"
-    region         = "ap-southeast-2"  # Adjust to your preferred region
+    region         = "ap-southeast-2" 
     encrypt        = true
     dynamodb_table = "terraform-state-lock"
   }
