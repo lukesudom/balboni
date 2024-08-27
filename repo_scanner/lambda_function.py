@@ -9,6 +9,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 DISCORD_WEBHOOK_URL = os.environ.get('DISCORD_WEBHOOK_URL')
+LOGGING_DISCORD_WEBHOOK_URL = os.environ.get('LOGGING_DISCORD_WEBHOOK_URL')
 
 
 def run_trufflehog(repo_url):
@@ -75,7 +76,7 @@ def format_trufflehog_result(result):
     formatted += "\n```"
     return formatted
 
-def send_to_discord(message):
+def send_to_discord(message, webhook_url):
     if not DISCORD_WEBHOOK_URL:
         logger.error("Discord webhook URL is not set")
         return
@@ -88,7 +89,7 @@ def send_to_discord(message):
             "content": chunk
         }
 
-        response = requests.post(DISCORD_WEBHOOK_URL, json=data)
+        response = requests.post(webhook_url, json=data)
         if response.status_code == 204:
             logger.info("Message chunk sent to Discord successfully")
         else:
@@ -131,15 +132,16 @@ def lambda_handler(event, context):
                     discord_message += format_trufflehog_result(result)
                     discord_message += "\n\n"
 
-                send_to_discord(discord_message)
+                send_to_discord(discord_message, DISCORD_WEBHOOK_URL)  # send to #balboni
             else:
                 logger.info(f"No output from TruffleHog for {repo_url}")
-                send_to_discord(f"No secrets found in repository: {repo_name}")
+                send_to_discord(f"No secrets found in repository: {repo_name}", LOGGING_DISCORD_WEBHOOK_URL)
+                # send to #balboni_logging
 
         except Exception as e:
             error_message = f"Error processing repository {repo_url}: {str(e)}"
             logger.error(error_message)
-            send_to_discord(error_message)
+            send_to_discord(error_message, LOGGING_DISCORD_WEBHOOK_URL)
 
     logger.info("Lambda function execution completed")
     return {

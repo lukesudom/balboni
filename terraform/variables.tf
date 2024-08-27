@@ -29,3 +29,8 @@ variable "image_tag" {
   type        = string
   default     = "latest"
 }
+
+variable "logging_discord_webhook_url" {
+  description = "Logging Discord Webhook URL"
+  type        = string
+}

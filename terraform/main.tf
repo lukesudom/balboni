@@ -24,6 +24,7 @@ resource "aws_lambda_function" "webhook_receiver" {
     variables = {
       SQS_QUEUE_URL = aws_sqs_queue.repo_scan_queue.url
       DISCORD_WEBHOOK_URL = var.discord_webhook_url
+      LOGGING_DISCORD_WEBHOOK_URL = var.logging_discord_webhook_url
     }
   }
 
@@ -50,6 +51,7 @@ resource "aws_lambda_function" "repo_scanner" {
       GIT_USERNAME = var.git_username
       GIT_TOKEN    = var.git_token
       DISCORD_WEBHOOK_URL = var.discord_webhook_url
+      LOGGING_DISCORD_WEBHOOK_URL = var.logging_discord_webhook_url
     }
   }
 
