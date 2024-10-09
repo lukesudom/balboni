@@ -2,8 +2,6 @@
 
 I've been watching you for a while now...
 
-"You haven't hit shit yet" (credentials)
-
 ## Description
 
 Balboni is a modular scanner for git repositories currently working with repositories hosted on Huggignface.
